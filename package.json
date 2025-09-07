@@ -1,0 +1,12 @@
+{
+  "name": "wan-remote-control",
+  "version": "1.0.0",
+  "description": "Remote control over WAN",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "sharp": "^0.34.3"
+  }
+}
