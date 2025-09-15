@@ -26,4 +26,8 @@ async function captureScreen() {
   return buffer
 }
 
-module.exports = { captureScreen }
+function getDimensions() {
+  return { width: 3200, height: 1800, scale: 2.5 }
+}
+
+module.exports = { captureScreen, getDimensions }

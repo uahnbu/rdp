@@ -4,6 +4,11 @@
   "description": "Remote control over WAN",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "mousemove": "\"system\\mouse.bat\" moveTo 64x64 && del mouse.exe",
+    "mouseclick": "\"system\\mouse.bat\" click && del mouse.exe",
+    "mousedouble": "\"system\\mouse.bat\" doubleClick && del mouse.exe",
+    "mouseright": "\"system\\mouse.bat\" rightClick && del mouse.exe",
+    "capture": "\"system\\screenCapture.bat\" media\\screenshot.jpg && del screenCapture.exe"
   }
 }

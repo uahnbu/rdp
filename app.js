@@ -1,5 +1,11 @@
 const { startServer } = require('./system/server.js')
 const { captureScreen, getDimensions } = require('./system/capture.js')
+const {
+  moveMouse,
+  clickMouse,
+  doubleMouse,
+  rightMouse
+} = require('./system/mouse.js')
 
 /**
  * @typedef {import('http').ServerResponse} ServerResponse
@@ -20,9 +26,38 @@ function serverOnRequest(req, res) {
     captureScreen()
       .then(res.end.bind(res))
       .catch(() => {
-        res.statusCode = 429
+        res.statusCode = 503
         res.end()
       })
+    return true
+  }
+
+  if (req.url === '/mousemove' && req.method === 'POST') {
+    let body = ''
+    req.on('data', (chunk) => (body += chunk.toString()))
+    req.on('end', () => {
+      const { mx, my } = JSON.parse(body)
+      moveMouse(mx | 0, my | 0).catch(() => (res.statusCode = 503))
+      res.end()
+    })
+    return true
+  }
+
+  if (req.url === '/mouseclick' && req.method === 'POST') {
+    clickMouse().catch(() => (res.statusCode = 503))
+    res.end()
+    return true
+  }
+
+  if (req.url === '/mousedouble' && req.method === 'POST') {
+    doubleMouse().catch(() => (res.statusCode = 503))
+    res.end()
+    return true
+  }
+
+  if (req.url === '/mouseright' && req.method === 'POST') {
+    rightMouse().catch(() => (res.statusCode = 503))
+    res.end()
     return true
   }
 
